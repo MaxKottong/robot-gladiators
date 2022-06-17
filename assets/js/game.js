@@ -1,4 +1,29 @@
-var fight = function(enemy) {
+var startGame = function () {
+    playerInfo.reset();
+
+    for (var i = 0; i < enemyInfo.length; i++) {
+        if (playerInfo.health > 0) {
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            var pickedEnemyObj = enemyInfo[i];
+            pickedEnemyObj.health = randomNumber(40, 60);
+            fight(pickedEnemyObj);
+
+            if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+
+                if (storeConfirm) {
+                    shop();
+                }
+            }
+        } else {
+            window.alert("You have lost your robot in battle! Game Over!");
+            break;
+        }
+    }
+    endGame();
+};
+
+var fight = function (enemy) {
     while (playerInfo.health > 0 && enemy.health > 0) {
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
@@ -39,31 +64,6 @@ var fight = function(enemy) {
             }
         }
     }
-};
-
-var startGame = function () {
-    playerInfo.reset();
-
-    for (var i = 0; i < enemyInfo.length; i++) {
-        if (playerInfo.health > 0) {
-            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-            var pickedEnemyObj = enemyInfo[i];
-            pickedEnemyObj.health = randomNumber(40, 60);
-            fight(pickedEnemyObj);
-
-            if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
-                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
-
-                if (storeConfirm) {
-                    shop();
-                }
-            }
-        } else {
-            window.alert("You have lost your robot in battle! Game Over!");
-            break;
-        }
-    }
-    endGame();
 };
 
 var endGame = function () {
@@ -113,8 +113,19 @@ var randomNumber = function (min, max) {
     return value;
 }
 
+var getPlayerName = function () {
+    var name = "";
+
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?");
+    }
+
+    console.log("Your robot's name is " + name);
+    return name;
+};
+
 var playerInfo = {
-    name: window.prompt("What is your robots name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
