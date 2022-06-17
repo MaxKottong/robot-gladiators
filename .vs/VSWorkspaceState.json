@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\assets",
+    "\\assets\\js"
   ],
-  "SelectedNode": "\\C:\\Users\\maxko\\Bootcamp\\Projects\\Robot-Gladiators",
+  "SelectedNode": "\\assets\\js\\game.js",
   "PreviewInSolutionExplorer": false
 }
